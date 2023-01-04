@@ -2,7 +2,7 @@
   "name": "cdk-project",
   "version": "0.1.0",
   "bin": {
-    "cdk-project": "bin/cdk-project.js"
+    "cdk-project": "/Infrastructure/Launcher.ts"
   },
   "scripts": {
     "build": "tsc",
