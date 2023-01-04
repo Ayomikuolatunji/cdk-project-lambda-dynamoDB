@@ -4,6 +4,6 @@ import { App } from "aws-cdk-lib";
 
 const app = new App();
 
-new SpaceStack(app, "personal-cdk", {
+new SpaceStack(app, "Personal-cdk", {
   stackName: "Personal-cdk",
 });
