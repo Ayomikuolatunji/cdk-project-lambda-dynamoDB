@@ -6,21 +6,15 @@ export class GenericTable {
   private primaryKey: string;
   private stack: Stack;
   private table: Table;
-  public constructor(
-    name: string,
-    primaryKey: string,
-    stack: Stack,
-    table: Table
-  ) {
+  public constructor(name: string, primaryKey: string, stack: Stack) {
     this.name = name;
     this.primaryKey = primaryKey;
     this.stack = stack;
-    this.table = table;
-    this.initialise;
+    this.initialize();
   }
 
-  private initialise() {
-    this.initialise();
+  private initialize() {
+    this.createTable();
   }
   private createTable() {
     this.table = new Table(this.stack, this.name, {
@@ -28,6 +22,7 @@ export class GenericTable {
         name: this.primaryKey,
         type: AttributeType.STRING,
       },
+      tableName: this.name,
     });
   }
 }

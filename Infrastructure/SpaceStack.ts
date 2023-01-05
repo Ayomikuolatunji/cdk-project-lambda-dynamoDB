@@ -8,9 +8,11 @@ import {
 } from "aws-cdk-lib/aws-lambda";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
+import { GenericTable } from "./GenericTable";
 
 export class SpaceStack extends Stack {
   private api = new RestApi(this, "helloApi");
+  private helloTable = new GenericTable("helloTable", "helloId", this);
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
     const helloLambda = new LambdaFunction(this, "helloLambda", {
