@@ -12,7 +12,6 @@ export class GenericTable {
     this.stack = stack;
     this.initialize();
   }
-
   private initialize() {
     this.createTable();
   }
