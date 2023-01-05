@@ -7,16 +7,13 @@ import {
   Runtime,
 } from "aws-cdk-lib/aws-lambda";
 import { Bucket } from "aws-cdk-lib/aws-s3";
-import { RestApi } from "aws-cdk-lib/aws-apigateway";
-
+import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
 
 export class SpaceStack extends Stack {
-
-  private api =new RestApi(this, "helloApi")
-
+  private api = new RestApi(this, "helloApi");
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
-   new LambdaFunction(this, "helloLambda", {
+    const helloLambda = new LambdaFunction(this, "helloLambda", {
       runtime: Runtime.NODEJS_18_X,
       code: Code.fromAsset(join(__dirname, "..", "services", "hello")),
       handler: "hello.main",
@@ -25,7 +22,9 @@ export class SpaceStack extends Stack {
       publicReadAccess: true,
       bucketName: "upload-new-image",
     });
+    // hello api lambda integration
+    const helloLambdaIntegration = new LambdaIntegration(helloLambda);
+    const helloLambdaResource = this.api.root.addResource("hello");
+    helloLambdaResource.addMethod("GET", helloLambdaIntegration);
   }
 }
-
-
