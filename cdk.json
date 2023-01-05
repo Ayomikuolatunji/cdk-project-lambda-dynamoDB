@@ -1,5 +1,7 @@
 {
-  "app": "npx ts-node --prefer-ts-exts Infrastructure/Launcher.ts",
+  
+   "app": "npx ts-node Infrastructure/Launcher.ts",
+  "versionReporting": false,
   "watch": {
     "include": [
       "**"
