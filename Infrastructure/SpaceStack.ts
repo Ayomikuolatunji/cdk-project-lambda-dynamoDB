@@ -16,16 +16,23 @@ export class SpaceStack extends Stack {
   private helloTable = new GenericTable("helloTable", "helloId", this);
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
-    // const helloLambda = new LambdaFunction(this, "helloLambda", {
-    //   runtime: Runtime.NODEJS_18_X,
-    //   code: Code.fromAsset(join(__dirname, "..", "services", "hello")),
-    //   handler: "hello.main",
+
+
+    const helloNodejs = new LambdaFunction(this, "helloLambda", {
+      runtime: Runtime.NODEJS_18_X,
+      code: Code.fromAsset(join(__dirname, "..", "build", "helloLambda")),
+      handler: "helloLambda.handler",
+    });
+
+    // const helloNodejs = new NodejsFunction(this, "helloLambda", {
+    //   entry: join(__dirname, "..", "services", "hello", "hello.ts"),
+    //   handler: "handler",
     // });
 
-    const helloNodejs = new NodejsFunction(this, "helloLambda", {
-      entry: join(__dirname, "..", "services", "hello", "hello.ts"),
-      handler: "handler",
-    });
+    // const helloNodejs = new NodejsFunction(this, "helloLambda", {
+    //   entry: join(__dirname, "..", "services", "hello", "hello.ts"),
+    //   handler: "handler",
+    // });
 
     new Bucket(this, "upload-img", {
       publicReadAccess: true,
