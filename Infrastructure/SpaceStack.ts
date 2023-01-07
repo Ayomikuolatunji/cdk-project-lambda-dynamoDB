@@ -9,7 +9,12 @@ import { PolicyStatement } from "aws-cdk-lib/aws-iam";
 
 export class SpaceStack extends Stack {
   private api = new RestApi(this, "helloApi");
-  private helloTable = new GenericTable("helloTable", "helloId", this);
+  private helloTable = new GenericTable(this, {
+    tableName: "helloTable",
+    primaryKey: "helloId",
+    createLambdaPath:"CreateTable"
+  });
+  
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
 
@@ -18,6 +23,7 @@ export class SpaceStack extends Stack {
       handler: "handler",
     });
 
+  // this.helloTable
     const s3ListPolicy = new PolicyStatement();
     s3ListPolicy.addActions("s3:ListAllMyBuckets");
     s3ListPolicy.addResources("*");
@@ -31,5 +37,10 @@ export class SpaceStack extends Stack {
     const helloLambdaIntegration = new LambdaIntegration(helloNodejs);
     const helloLambdaResource = this.api.root.addResource("hello");
     helloLambdaResource.addMethod("GET", helloLambdaIntegration);
+
+
+    // spaces api integration  
+    const spaceResource=this.api.root.addResource("spaces")
+    spaceResource.addMethod("POST", this.helloTable.createLambdaIntegration)
   }
 }
