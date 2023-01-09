@@ -14,4 +14,6 @@ import { handler } from "../../services/helloTable/readTable";
 //   },
 // };
 
-handler({} as any, {} as any);
+handler({} as any, {} as any).
+then(data=>console.log(data))
+.catch(err=>console.log(err))

@@ -10,5 +10,6 @@ Content-Type: application/json
 {
     "location":"London",
     "name":"Ayomiku",
-    "friend":"Angela"
+    "username":"Ayomiku Olatunji",
+    "friend":"Obed"
 }
