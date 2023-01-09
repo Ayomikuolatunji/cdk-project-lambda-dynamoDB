@@ -4,8 +4,8 @@ import { v4 } from 'uuid'
 
 
 
-const dbClient = new DynamoDB.DocumentClient();
 
+const dbClient = new DynamoDB.DocumentClient();
 async function handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
     const result: APIGatewayProxyResult = {
         statusCode: 200,

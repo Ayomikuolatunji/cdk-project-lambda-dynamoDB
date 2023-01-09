@@ -65,18 +65,18 @@ export class GenericTable {
       this.createLambda = this.createSingleLambda(this.props.createLambdaPath);
       this.createLambdaIntegration=new LambdaIntegration(this.createLambda)
     }
-    // if (this.props.readLambdaPath) {
-    //   this.readLambda = this.createSingleLambda(this.props.readLambdaPath);
-    //   this.readLambdaIntegration=new LambdaIntegration(this.readLambda)
-    // }
-    // if (this.props.updateLambdaPath) {
-    //   this.updateLambda = this.createSingleLambda(this.props.updateLambdaPath);
-    //   this.updateLambdaIntegration=new LambdaIntegration(this.updateLambda)
-    // }
-    // if (this.props.deleteLambdaPath) {
-    //   this.deleteLambda = this.createSingleLambda(this.props.deleteLambdaPath);
-    //   this.deleteLambadaIntegration=new LambdaIntegration(this.deleteLambda)
-    // }
+    if (this.props.readLambdaPath) {
+      this.readLambda = this.createSingleLambda(this.props.readLambdaPath);
+      this.readLambdaIntegration=new LambdaIntegration(this.readLambda)
+    }
+    if (this.props.updateLambdaPath) {
+      this.updateLambda = this.createSingleLambda(this.props.updateLambdaPath);
+      this.updateLambdaIntegration=new LambdaIntegration(this.updateLambda)
+    }
+    if (this.props.deleteLambdaPath) {
+      this.deleteLambda = this.createSingleLambda(this.props.deleteLambdaPath);
+      this.deleteLambadaIntegration=new LambdaIntegration(this.deleteLambda)
+    }
   }
   private createSingleLambda(lambdaName: string): NodejsFunction {
     const lambdaId = `${this.props.tableName}-${lambdaName}`;
