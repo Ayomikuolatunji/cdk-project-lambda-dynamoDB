@@ -13,3 +13,7 @@ Content-Type: application/json
     "username":"Ayomiku Olatunji",
     "friend":"Obed"
 }
+###
+
+GET {{endpoint}}/spaces?helloId=f803eb24-a79e-4995-922a-e53fdbe1af37
+###

@@ -13,7 +13,9 @@ export class SpaceStack extends Stack {
     tableName: "helloTable",
     primaryKey: "helloId",
     createLambdaPath:"CreateTable",
-    readLambdaPath:"readTable"
+    readLambdaPath:"readTable",
+    updateLambdaPath:"updateTable"
+    // secondaryIndexes:["location", "username"]
   });
   
   constructor(scope: Construct, id: string, props: StackProps) {

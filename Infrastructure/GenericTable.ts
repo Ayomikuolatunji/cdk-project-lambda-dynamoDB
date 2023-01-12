@@ -3,6 +3,7 @@ import { LambdaIntegration } from "aws-cdk-lib/aws-apigateway";
 import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { join } from "path";
+
 interface TableProps {
   createLambdaPath?: string;
   readLambdaPath?: string;
@@ -10,6 +11,7 @@ interface TableProps {
   deleteLambdaPath?: string;
   tableName: string;
   primaryKey: string;
+  // secondaryIndexes?: string[];
 }
 
 export class GenericTable {
@@ -34,6 +36,7 @@ export class GenericTable {
   }
   private initialize() {
     this.createTable();
+    // this.addSecondaryIndexes();
     this.createLambdas();
     this.grantTableRight();
   }
@@ -46,6 +49,19 @@ export class GenericTable {
       tableName: this.props.tableName,
     });
   }
+  // private addSecondaryIndexes() {
+  //   if (this.props.secondaryIndexes?.length) {
+  //     for (const secondaryIndex of this.props.secondaryIndexes) {
+  //       this.table.addGlobalSecondaryIndex({
+  //         indexName: "london",
+  //         partitionKey: {
+  //           name:"london",
+  //           type: AttributeType.BINARY,
+  //         },
+  //       });
+  //     }
+  //   }
+  // }
   private grantTableRight() {
     if (this.createLambda) {
       this.table.grantWriteData(this.createLambda);
@@ -63,20 +79,20 @@ export class GenericTable {
   private createLambdas() {
     if (this.props.createLambdaPath) {
       this.createLambda = this.createSingleLambda(this.props.createLambdaPath);
-      this.createLambdaIntegration=new LambdaIntegration(this.createLambda)
+      this.createLambdaIntegration = new LambdaIntegration(this.createLambda);
     }
     if (this.props.readLambdaPath) {
       this.readLambda = this.createSingleLambda(this.props.readLambdaPath);
-      this.readLambdaIntegration=new LambdaIntegration(this.readLambda)
+      this.readLambdaIntegration = new LambdaIntegration(this.readLambda);
     }
-    if (this.props.updateLambdaPath) {
-      this.updateLambda = this.createSingleLambda(this.props.updateLambdaPath);
-      this.updateLambdaIntegration=new LambdaIntegration(this.updateLambda)
-    }
-    if (this.props.deleteLambdaPath) {
-      this.deleteLambda = this.createSingleLambda(this.props.deleteLambdaPath);
-      this.deleteLambadaIntegration=new LambdaIntegration(this.deleteLambda)
-    }
+    // if (this.props.updateLambdaPath) {
+    //   this.updateLambda = this.createSingleLambda(this.props.updateLambdaPath);
+    //   this.updateLambdaIntegration = new LambdaIntegration(this.updateLambda);
+    // }
+    // if (this.props.deleteLambdaPath) {
+    //   this.deleteLambda = this.createSingleLambda(this.props.deleteLambdaPath);
+    //   this.deleteLambadaIntegration = new LambdaIntegration(this.deleteLambda);
+    // }
   }
   private createSingleLambda(lambdaName: string): NodejsFunction {
     const lambdaId = `${this.props.tableName}-${lambdaName}`;

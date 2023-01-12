@@ -1,19 +1,18 @@
-// import {
-//   APIGatewayProxyEvent,
-//   APIGatewayProxyResult,
-//   Context,
-// } from "aws-lambda";
+import { APIGatewayProxyEvent } from "aws-lambda";
+import { handler } from "../../services/helloTable/updateTable";
 
-import { handler } from "../../services/helloTable/readTable";
+const event: APIGatewayProxyEvent = {
+  queryStringParameters: {
+    helloId: "f803eb24-a79e-4995-922a-e53fdbe1af37",
+  },
+  body: {
+    location: "new location",
+  },
+} as any;
 
-
-
-// const event = {
-//   body: {
-//     location: "Paris",
-//   },
-// };
-
-handler({} as any, {} as any).
-then(data=>console.log(data))
-.catch(err=>console.log(err))
+handler(event, {} as any)
+  .then((apiResult) => {
+    const items = JSON.parse(apiResult.body);
+    console.log(items);
+  })
+  .catch((err) => console.log(err));
