@@ -5,8 +5,6 @@ import {
   Context,
 } from "aws-lambda";
 
-const TABLE_NAME = process.env.TABLE_NAME as string;
-const PRIMARY_KEY = process.env.PRIMARY_KEY as string;
 const dbClient = new DynamoDB.DocumentClient();
 
 async function handler(
@@ -20,7 +18,7 @@ async function handler(
 
   const requestBody =
     typeof event.body == "object" ? event.body : JSON.parse(event.body);
-  const helloId = event.queryStringParameters?.[PRIMARY_KEY];
+  const helloId = event.queryStringParameters?.["helloId"];
 
   if (requestBody && helloId) {
     const requestBodyKey = Object.keys(requestBody)[0];
@@ -28,7 +26,7 @@ async function handler(
 
     const updateResult = await dbClient
       .update({
-        TableName: TABLE_NAME,
+        TableName: "helloTable",
         Key: {
           ["helloId"]: helloId,
         },

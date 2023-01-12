@@ -8,12 +8,29 @@ POST {{endpoint}}/spaces/
 Content-Type: application/json
 
 {
-    "location":"London",
+    "location":"UK",
     "name":"Ayomiku",
     "username":"Ayomiku Olatunji",
     "friend":"Obed"
 }
 ###
 
-GET {{endpoint}}/spaces?helloId=f803eb24-a79e-4995-922a-e53fdbe1af37
+GET {{endpoint}}/spaces
+###
+
+PUT {{endpoint}}/spaces?helloId=f803eb24-a79e-4995-922a-e53fdbe1af37
+Content-Type: application/json
+
+{
+    "location":"London house",
+    "name":"Ayomiku",
+    "username":"Ayomiku Olatunji",
+    "friend":"Obed"
+}
+###
+
+
+DELETE  {{endpoint}}/spaces?helloId=7d381b35-4012-4d4c-8b39-893a0142fc57
+Content-Type: application/json
+
 ###
