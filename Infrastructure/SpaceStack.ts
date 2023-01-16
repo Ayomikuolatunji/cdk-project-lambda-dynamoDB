@@ -9,6 +9,7 @@ import { PolicyStatement } from "aws-cdk-lib/aws-iam";
 
 export class SpaceStack extends Stack {
   private api = new RestApi(this, "helloApi");
+  private endpoints = new RestApi(this, "endpoints");
   private helloTable = new GenericTable(this, {
     tableName: "helloTable",
     primaryKey: "helloId",
@@ -16,7 +17,6 @@ export class SpaceStack extends Stack {
     readLambdaPath: "readTable",
     updateLambdaPath: "updateTable",
     deleteLambdaPath: "deleteTable",
-    // secondaryIndexes:["location", "username"]
   });
 
   constructor(scope: Construct, id: string, props: StackProps) {
@@ -37,6 +37,7 @@ export class SpaceStack extends Stack {
       publicReadAccess: true,
       bucketName: "upload-new-image",
     });
+
     // hello api lambda integration
     const helloLambdaIntegration = new LambdaIntegration(helloNodejs);
     const helloLambdaResource = this.api.root.addResource("hello");

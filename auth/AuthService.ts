@@ -13,7 +13,14 @@ Amplify.configure({
 
 export class AuthService {
   public async login(username: string, password: string) {
-    const user = await Auth.signIn(username, password);
+    const user = await Auth.signIn(
+      config.TEST_USER_NAME,
+      config.TEST_USER_password
+    );
+    console.log("user");
     return user;
   }
 }
+
+
+const authService = new AuthService();
