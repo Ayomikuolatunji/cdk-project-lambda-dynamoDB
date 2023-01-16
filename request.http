@@ -8,7 +8,7 @@ POST {{endpoint}}/spaces/
 Content-Type: application/json
 
 {
-    "location":"UK",
+    "location":"Nigeria",
     "name":"Ayomiku",
     "username":"Ayomiku Olatunji",
     "friend":"Obed"
@@ -30,7 +30,7 @@ Content-Type: application/json
 ###
 
 
-DELETE  {{endpoint}}/spaces?helloId=7d381b35-4012-4d4c-8b39-893a0142fc57
+DELETE  {{endpoint}}/spaces?helloId=4ac75b65-ff3f-41c9-8b6f-a613e9073eb2
 Content-Type: application/json
 
 ###
